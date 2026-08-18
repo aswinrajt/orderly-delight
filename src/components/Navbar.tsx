@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/context/AuthContext";
 import { LogOut, ShoppingBag, UtensilsCrossed } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 type Props = {
   cartCount: number;
@@ -10,6 +21,8 @@ type Props = {
 export function Navbar({ cartCount, onLogout }: Props) {
   const { username, logout } = useAuth();
   const navigate = useNavigate();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
 
   const handleLogout = () => {
     onLogout?.();
@@ -41,7 +54,7 @@ export function Navbar({ cartCount, onLogout }: Props) {
             <span className="hidden text-sm text-muted-foreground md:inline">Hi, {username}</span>
           )}
           <button
-            onClick={handleLogout}
+            onClick={() => setConfirmOpen(true)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
           >
             <LogOut className="size-4" aria-hidden="true" />
@@ -49,6 +62,21 @@ export function Navbar({ cartCount, onLogout }: Props) {
           </button>
         </div>
       </div>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Log out of Spice Route?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Your current order will be cleared and you&apos;ll be returned to the login page.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Stay signed in</AlertDialogCancel>
+            <AlertDialogAction onClick={handleLogout}>Log out</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </header>
   );
 }
