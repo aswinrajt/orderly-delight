@@ -10,7 +10,7 @@ import { addToCart } from "@/redux/cartSlice";
 
 export function MenuPage() {
   const dispatch = useAppDispatch();
-  const [activeCategoryId, setActiveCategoryId] = useState(categories[0].id);
+  const [activeCategoryId, setActiveCategoryId] = useState(categories[0]!.id);
 
   const visibleProducts = useMemo(
     () => products.filter((product) => product.categoryId === activeCategoryId),
