@@ -21,6 +21,8 @@ type Props = {
 export function Navbar({ cartCount, onLogout }: Props) {
   const { username, logout } = useAuth();
   const navigate = useNavigate();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
 
   const handleLogout = () => {
     onLogout?.();
