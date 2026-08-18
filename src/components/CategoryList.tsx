@@ -9,7 +9,7 @@ type Props = {
 export function CategoryList({ activeCategoryId, onSelectCategory }: Props) {
   return (
     <nav aria-label="Product categories">
-      <ul className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
+      <ul className="-mx-4 -mt-2 flex gap-3 overflow-x-auto px-4 pt-3 pb-3 sm:mx-0 sm:flex-wrap sm:px-0">
         {categories.map((category) => {
           const isActive = category.id === activeCategoryId;
           const Icon = category.icon;
