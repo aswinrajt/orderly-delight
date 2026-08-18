@@ -11,6 +11,7 @@ export function CategoryList({ activeCategoryId, onSelectCategory }: Props) {
     <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 sm:flex-wrap">
       {categories.map((category) => {
         const isActive = category.id === activeCategoryId;
+        const Icon = category.icon;
         return (
           <button
             key={category.id}
@@ -22,9 +23,7 @@ export function CategoryList({ activeCategoryId, onSelectCategory }: Props) {
                 : "border-border bg-card text-foreground hover:bg-secondary",
             )}
           >
-            <span className="text-lg" aria-hidden>
-              {category.icon}
-            </span>
+            <Icon className="size-4.5" />
             {category.name}
           </button>
         );
