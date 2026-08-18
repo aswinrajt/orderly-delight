@@ -1,27 +1,38 @@
-import { useAppDispatch, useAppSelector, selectCartItems, selectCartTotal } from "@/redux/store";
-import {
-  clearCart,
-  decreaseQuantity,
-  increaseQuantity,
-  removeFromCart,
-} from "@/redux/cartSlice";
+import type { CartItem as CartItemType } from "@/hooks/useCart";
 import { CartItem } from "./CartItem";
 import { formatPrice } from "@/lib/format";
 import { ShoppingCart } from "lucide-react";
 
-export function Cart() {
-  const dispatch = useAppDispatch();
-  const items = useAppSelector(selectCartItems);
-  const total = useAppSelector(selectCartTotal);
+type Props = {
+  items: CartItemType[];
+  total: number;
+  onIncrease: (id: string) => void;
+  onDecrease: (id: string) => void;
+  onRemove: (id: string) => void;
+  onClear: () => void;
+  onBrowseProducts: () => void;
+};
 
+export function Cart({
+  items,
+  total,
+  onIncrease,
+  onDecrease,
+  onRemove,
+  onClear,
+  onBrowseProducts,
+}: Props) {
   return (
-    <aside className="rounded-2xl border border-border bg-card p-4 shadow-sm lg:sticky lg:top-24">
+    <aside
+      aria-label="Order summary"
+      className="rounded-2xl border border-border bg-card p-4 shadow-sm lg:sticky lg:top-24"
+    >
       <div className="flex items-center justify-between gap-2">
         <h2 className="font-display text-lg font-bold">Your Order</h2>
         {items.length > 0 && (
           <button
-            onClick={() => dispatch(clearCart())}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-destructive"
+            onClick={onClear}
+            className="rounded-lg px-1.5 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-destructive focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
           >
             Clear
           </button>
@@ -29,12 +40,18 @@ export function Cart() {
       </div>
 
       {items.length === 0 ? (
-        <div className="flex flex-col items-center gap-2 py-12 text-center">
+        <div className="flex flex-col items-center gap-2 py-10 text-center">
           <span className="flex size-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
-            <ShoppingCart className="size-7" />
+            <ShoppingCart className="size-7" aria-hidden="true" />
           </span>
           <p className="font-semibold">Your order is empty</p>
           <p className="text-sm text-muted-foreground">Add some tasty items to get started.</p>
+          <button
+            onClick={onBrowseProducts}
+            className="mt-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
+          >
+            Browse Products
+          </button>
         </div>
       ) : (
         <>
@@ -43,23 +60,31 @@ export function Cart() {
               <CartItem
                 key={item.id}
                 item={item}
-                onIncrease={(id) => dispatch(increaseQuantity(id))}
-                onDecrease={(id) => dispatch(decreaseQuantity(id))}
-                onRemove={(id) => dispatch(removeFromCart(id))}
+                onIncrease={onIncrease}
+                onDecrease={onDecrease}
+                onRemove={onRemove}
               />
             ))}
           </ul>
-          <div className="mt-4 border-t border-border pt-4">
-            <div className="flex items-center justify-between">
+          <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span>Subtotal</span>
+              <span className="font-medium text-foreground">{formatPrice(total)}</span>
+            </div>
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span>Delivery</span>
+              <span className="font-medium text-foreground">Free</span>
+            </div>
+            <div className="flex items-center justify-between border-t border-border pt-3">
               <span className="font-semibold">Total</span>
               <span className="font-display text-2xl font-bold text-primary">
                 {formatPrice(total)}
               </span>
             </div>
-            <button className="mt-3 w-full rounded-xl bg-primary py-2.5 font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
-              Place Order
-            </button>
           </div>
+          <button className="mt-4 w-full rounded-xl bg-primary py-2.5 font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none active:scale-[0.99]">
+            Place Order
+          </button>
         </>
       )}
     </aside>

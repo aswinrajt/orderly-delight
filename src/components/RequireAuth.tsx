@@ -1,9 +1,9 @@
 import { useEffect, type ReactNode } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useAppSelector } from "@/redux/store";
+import { useAuth } from "@/context/AuthContext";
 
 export function RequireAuth({ children }: { children: ReactNode }) {
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
