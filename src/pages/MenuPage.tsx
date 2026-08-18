@@ -27,11 +27,16 @@ export function MenuPage() {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background">
+      <div
+        aria-hidden="true"
+        className="bg-grid pointer-events-none fixed inset-0 [mask-image:radial-gradient(90%_60%_at_50%_0%,black,transparent)]"
+      />
+      <div className="relative">
       <Navbar cartCount={count} onLogout={clearCart} />
       <main className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[1fr_360px] lg:gap-8">
         <section className="min-w-0">
-          <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          <h1 className="text-gradient font-display text-2xl font-bold tracking-tight sm:text-3xl">
             Browse the menu
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -59,6 +64,7 @@ export function MenuPage() {
           }
         />
       </main>
+      </div>
     </div>
   );
 }

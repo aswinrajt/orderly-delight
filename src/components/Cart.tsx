@@ -25,8 +25,9 @@ export function Cart({
   return (
     <aside
       aria-label="Order summary"
-      className="rounded-2xl border border-border bg-card p-4 shadow-sm lg:sticky lg:top-24"
+      className="relative overflow-hidden rounded-2xl border border-border glass p-4 glow lg:sticky lg:top-24"
     >
+      <span aria-hidden="true" className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
       <div className="flex items-center justify-between gap-2">
         <h2 className="font-display text-lg font-bold">Your Order</h2>
         {items.length > 0 && (
@@ -77,12 +78,12 @@ export function Cart({
             </div>
             <div className="flex items-center justify-between border-t border-border pt-3">
               <span className="font-semibold">Total</span>
-              <span className="font-display text-2xl font-bold text-primary">
+              <span className="text-gradient font-display text-2xl font-bold">
                 {formatPrice(total)}
               </span>
             </div>
           </div>
-          <button className="mt-4 w-full rounded-xl bg-primary py-2.5 font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none active:scale-[0.99]">
+          <button className="mt-4 w-full rounded-xl bg-primary py-2.5 font-semibold tracking-wide text-primary-foreground transition-all duration-200 hover:bg-primary/90 hover:glow-strong focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none active:scale-[0.99]">
             Place Order
           </button>
         </>

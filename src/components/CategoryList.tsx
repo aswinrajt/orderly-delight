@@ -19,10 +19,10 @@ export function CategoryList({ activeCategoryId, onSelectCategory }: Props) {
                 onClick={() => onSelectCategory(category.id)}
                 aria-pressed={isActive}
                 className={cn(
-                  "flex items-center gap-2 rounded-2xl border px-4 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none",
+                  "flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold tracking-wide transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none",
                   isActive
-                    ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                    : "border-border bg-card text-foreground hover:border-primary/40 hover:bg-secondary",
+                    ? "border-primary/60 bg-primary text-primary-foreground glow-strong"
+                    : "border-border/70 glass text-foreground hover:-translate-y-0.5 hover:border-primary/50 hover:glow",
                 )}
               >
                 <Icon className="size-4.5" aria-hidden="true" />

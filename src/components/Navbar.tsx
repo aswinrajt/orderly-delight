@@ -31,20 +31,20 @@ export function Navbar({ cartCount, onLogout }: Props) {
   };
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-card/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-border/70 glass">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <div className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground glow-strong">
             <UtensilsCrossed className="size-5" aria-hidden="true" />
           </span>
           <div className="leading-tight">
-            <p className="font-display text-lg font-bold tracking-tight">Spice&nbsp;Route</p>
+            <p className="text-gradient font-display text-lg font-bold tracking-tight">Spice&nbsp;Route</p>
             <p className="hidden text-xs text-muted-foreground sm:block">Order fresh, order fast</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm text-secondary-foreground">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-secondary/70 px-3 py-1.5 text-sm text-secondary-foreground">
             <ShoppingBag className="size-4" aria-hidden="true" />
             <span className="sr-only">Items in cart:</span>
             {cartCount}
@@ -55,7 +55,7 @@ export function Navbar({ cartCount, onLogout }: Props) {
           )}
           <button
             onClick={() => setConfirmOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium transition-all duration-200 hover:border-primary/40 hover:bg-secondary hover:glow focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
           >
             <LogOut className="size-4" aria-hidden="true" />
             Logout
