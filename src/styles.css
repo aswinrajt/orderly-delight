@@ -57,13 +57,6 @@
   color: transparent;
 }
 
-@utility edge-line {
-  position: relative;
-}
-@utility edge-line-after {
-  content: "";
-}
-
 @utility bg-hero {
   background-image: radial-gradient(
       110% 80% at 50% 0%,
