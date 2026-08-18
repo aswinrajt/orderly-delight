@@ -54,7 +54,7 @@ export function Navbar({ cartCount, onLogout }: Props) {
             <span className="hidden text-sm text-muted-foreground md:inline">Hi, {username}</span>
           )}
           <button
-            onClick={handleLogout}
+            onClick={() => setConfirmOpen(true)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
           >
             <LogOut className="size-4" aria-hidden="true" />
