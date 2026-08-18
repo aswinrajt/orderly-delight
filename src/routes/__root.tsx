@@ -8,9 +8,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { Provider as ReduxProvider } from "react-redux";
 
-import { store } from "../redux/store";
+import { AuthProvider } from "../context/AuthContext";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -127,10 +126,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReduxProvider store={store}>
+      <AuthProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
-      </ReduxProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
